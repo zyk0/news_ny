@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NYTimes API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+	<link rel="icon" href="ny.ico" type="image/x-icon">
+</head>
+
+<body>
+    <h3 class="text-center card-general">Новости New-York Times </h3>
+
+    <div id="news" class="container">
+        <news-list :results="results"></news-list>
+    </div>
+	
+<!-- include Vue here  -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- axios v0.21.1-->
+<script src="https://unpkg.com/vue"></script>
+<!-- Vue.js v2.6.14 -->
+<script src="api_key.js"></script>
+<script src="app.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css.css">
+</body>
+</html>

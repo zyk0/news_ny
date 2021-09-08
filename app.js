@@ -72,6 +72,12 @@ Vue.component('news-list', {
 			console.log('posts ', posts);
 			
 			//картинка для поста
+			posts.map(post => {
+                let imgObj = post.multimedia.find(media => media.format === "superJumbo");
+				post.image_url = imgObj.url;
+                //post.image_url = imgObj ? imgObj.url : "http://placehold.it/300x200?text=N/A";
+            });
+			
 
             let i;
 			let j;

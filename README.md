@@ -1,8 +1,8 @@
-### Vue  NY Times API 
+### Vue NY Times API 
 
-
+# Vue.js,  Axios.js, Found.framework 
 
 
 fetch data from API NYTimes
-https://developer.nytimes.com
-https://developer.nytimes.com/docs/top-stories-product/1/overview
+developer.nytimes.com
+developer.nytimes.com/docs/top-stories-product/1/overview

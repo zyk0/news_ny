@@ -3,7 +3,7 @@ const apiKey = api_key.KEY;
  
 //const nytSections  = 'travel'; 
 //nytSections массив
-/*
+
 const nytSections = [
   "home",
   "arts",
@@ -32,7 +32,7 @@ const nytSections = [
   "us",
   "world",
 ]
-*/
+
 console.log('apiKey: ', apiKey ? "действующий apiKey" : "недействующий apiKey"); 
 
 function buildUrl (url) {
@@ -95,11 +95,21 @@ Vue.component('news-list', {
     }
 })
 
+let sections =  nytSections;
+let randomsections = Math.floor(Math.random()*sections.length)
+console.log('sections.length: ', sections.length);
+// произвольный элемент  из массива от 0 до sections.length
+
+let choosesection = sections[randomsections]; 
+console.log('choosesection: ', choosesection);
+//произвольный элемент  из массива тем. подставлять в url запроса
+
 const vm = new Vue({
     el: "#news", 
     data: {
         results: [],
-        section: 'arts' // section по дефолту , например, 'arts'
+        //section: 'arts' // section по дефолту , например, 'arts'
+		section: choosesection// рандомная тема новостей
     }, 
      mounted() {
         this.getPosts(this.section);

@@ -15,20 +15,30 @@ body {
 .container{
 	 background-color: #FFF1E0;
 }
-.card-general{
-	background-color: #F2DFCE;
-	padding: 10px 0px 20px 0px;
-	min-height: 3.125rem;
+.zagolovok{
+	padding-bottom: 1.25rem;
 }
+.card-body{
+	padding: 5px 0px 5px 0px;
+	min-height: 0.9rem;
+}
+
 .card-title{
 	background-color: #F2DFCE;
 	font-family: Panton-BlackCaps, 'Panton-BlackCaps.otf', bold;
+	padding: 0px 5px 0px 5px;
 }
 .card {
-    height: 34.375rem; /*  500px; 100%  */
+    max-height: 34.375rem; /*  500px; 100%  */
 	background-color: #FFF1E0;
+	overflow: hidden;
 }
-.card-abstract{
-	padding: 0px 5px 0px 10px;
+.card-text{
+	padding: 0px 5px 0px 5px;
 	font-family: Panton-LightCaps, 'Panton-LightCaps.otf';
+}
+
+.nytimg{
+	width: 15.625rem;
+	height: 15.625rem;
 }

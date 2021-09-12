@@ -10,4 +10,4 @@ developer.nytimes.com/docs/top-stories-product/1/overview
 
 #dev server
 localhost:3000/
-browser-sync start --server --files "*.css, *.html"
+browser-sync start --server --files "*.css, *.html, *.js"

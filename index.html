@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NYTimes API</title>
-    <link rel="stylesheet" 
-		  href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+		  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
 	<link rel="icon" href="ny.ico" type="image/x-icon">
 </head>
 
 <body>
-    <h3 class="text-center card-general">Новости New-York Times </h3>
+    <h3 class="text-center display-4 blog-header-logo text-dark zagolovok">Новости New-York Times </h3>
 
     <div id="news" class="container">
         <news-list :results="results"></news-list>

@@ -43,23 +43,32 @@ function buildUrl (url) {
 Vue.component('news-list', {
     props: ['results'], 
     template: `
-        <section>
+        <section class="container">
             <div class="row" v-for="posts in newsPosts">
-                <div class="columns large-3 medium-6" v-for="post in posts">
-                    <div class="card">
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3" v-for="post in posts">
+                    <div class="card" style="">
+
+                    <div class="card-img ">
+							<a :href="post.url" target="_blank">
+                                <img :src="post.image_url" class="nytimg">
+                            </a>  
+					</div>
+
+                    <div class="card-body">
+
                         <div class="card-title">
                             {{ post.title }}
                         </div>
-						<div class="">
-							<a :href="post.url" target="_blank"><img :src="post.image_url"></a>  
-						</div>
-                        <div class="card-abstract">
+
+                        <div class="card-text">
                             <p>{{ post.abstract }}</p>
                         </div>
 
 						<div class="card-section">
                             <p><small>рубрика: {{ post.section }}</small></p>
 							<p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
+                        </div>
+
                         </div>
                     </div>
                 </div>

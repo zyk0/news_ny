@@ -4,8 +4,8 @@
   font-weight: normal;
   src: local("/panton");
   
-  src: url('/panton/Panton-BlackCaps.otf');
-  src: url('/panton/Panton-LightCaps.otf');
+  src: url('panton/Panton-BlackCaps.otf');
+  src: url('panton/Panton-LightCaps.otf');
 }
 
 body {
@@ -38,7 +38,16 @@ body {
 	font-family: Panton-LightCaps, 'Panton-LightCaps.otf';
 }
 
+.card-img{
+	/*width: 15.625rem;*/
+	/*height: 15.625rem; */
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
 .nytimg{
-	width: 15.625rem;
-	height: 15.625rem;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
 }

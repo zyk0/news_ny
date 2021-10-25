@@ -80,11 +80,12 @@ Vue.component('news-list', {
             let posts = this.results;
 			console.log('posts ', posts);
 			
+			
 			//картинка для поста
 			posts.map(post => {
                 let imgObj = post.multimedia.find(media => media.format === "superJumbo");
 				post.image_url = imgObj.url;
-                //post.image_url = imgObj ? imgObj.url : "http://placehold.it/300x200?text=N/A";
+                //post.image_url = imgObj ? imgObj.url : "img.png";
             });
 			
 
@@ -92,7 +93,8 @@ Vue.component('news-list', {
 			let j;
 			let fragmentArray = []; 
 			let chunk = 4;
-            for (i=0, j=0; i < posts.length; i += chunk, j++) {
+			let maximumPost = 8; // 4 ,8, 12, posts.length;
+            for (i=0, j=0; i < maximumPost; i += chunk, j++) {
                 fragmentArray[j] = posts.slice(i,i+chunk);
             }
 			console.log('posts.length: ', posts.length);

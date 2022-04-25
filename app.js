@@ -3,7 +3,7 @@ const apiKey = api_key.KEY;
  
 //const nytSections  = 'travel'; 
 //nytSections массив
-
+/*
 const nytSections = [
   "home",
   "arts",
@@ -32,10 +32,15 @@ const nytSections = [
   "us",
   "world",
 ]
-
+*/
 console.log('apiKey: ', apiKey ? "действующий apiKey" : "недействующий apiKey"); 
 
 function buildUrl (url) {
+	
+	console.log('NYTapiUrl: ' ,NYTapiUrl);
+	console.log('url: ', url);
+	console.log('apiKey: ', apiKey);
+	
     return NYTapiUrl + url + ".json?api-key=" + apiKey;  
 }
 
@@ -43,35 +48,39 @@ function buildUrl (url) {
 Vue.component('news-list', {
     props: ['results'], 
     template: `
-        <section class="container">
+        <section>
             <div class="row" v-for="posts in newsPosts">
-                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3" v-for="post in posts">
-                    <div class="card" style="">
-
-                    <div class="card-img ">
-							<a :href="post.url" target="_blank">
-                                <img :src="post.image_url" class="nytimg">
-                            </a>  
-					</div>
-
-                    <div class="card-body">
-
+			
+                <div class="columns large-3 medium-6" v-for="post in posts">
+                    <div class="card">
+					
                         <div class="card-title">
-                            {{ post.title }}
+                            <span class="bold">post.title</span>: 
+								<a :href="post.url" target="_blank" class="linkcolor">
+									{{ post.title }}
+								</a>
                         </div>
-
-                        <div class="card-text">
-                            <p>{{ post.abstract }}</p>
+						
+						<div class="media-object-section">
+							<!--
+							<span class="bold">post.url</span>: 
+							<a :href="post.url" target="_blank">{{post.url}}</a> 
+							-->
+							<img :src="post.multimedia[1].url" alt="post.multimedia[1].copyright">
+						</div>
+						
+                        <div class="card-abstract">
+                            <span class="bold">post.abstract</span>: <p>{{ post.abstract }}</p>
                         </div>
 
 						<div class="card-section">
-                            <p><small>рубрика: {{ post.section }}</small></p>
-							<p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
+                            <span class="bold">post.section</span>: <p><small>рубрика: {{ post.section }}</small></p>
+							<span class="bold">post.published_date</span>:  <p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
                         </div>
-
-                        </div>
+						
                     </div>
                 </div>
+				
             </div>
         </section>
     `,
@@ -80,21 +89,13 @@ Vue.component('news-list', {
             let posts = this.results;
 			console.log('posts ', posts);
 			
-			
 			//картинка для поста
-			posts.map(post => {
-                let imgObj = post.multimedia.find(media => media.format === "superJumbo");
-				post.image_url = imgObj.url;
-                //post.image_url = imgObj ? imgObj.url : "img.png";
-            });
-			
 
             let i;
 			let j;
 			let fragmentArray = []; 
 			let chunk = 4;
-			let maximumPost = 8; // 4 ,8, 12, posts.length;
-            for (i=0, j=0; i < maximumPost; i += chunk, j++) {
+            for (i=0, j=0; i < posts.length; i += chunk, j++) {
                 fragmentArray[j] = posts.slice(i,i+chunk);
             }
 			console.log('posts.length: ', posts.length);
@@ -106,21 +107,11 @@ Vue.component('news-list', {
     }
 })
 
-let sections =  nytSections;
-let randomsections = Math.floor(Math.random()*sections.length)
-console.log('sections.length: ', sections.length);
-// произвольный элемент  из массива от 0 до sections.length
-
-let choosesection = sections[randomsections]; 
-console.log('choosesection: ', choosesection);
-//произвольный элемент  из массива тем. подставлять в url запроса
-
 const vm = new Vue({
     el: "#news", 
     data: {
         results: [],
-        //section: 'arts' // section по дефолту , например, 'arts'
-		section: choosesection// рандомная тема новостей
+        section: 'arts' // section по дефолту , например, 'arts'
     }, 
      mounted() {
         this.getPosts(this.section);
@@ -128,7 +119,8 @@ const vm = new Vue({
     methods: {
         getPosts(section) {
             let url = buildUrl(section); 
-			console.log('url: ', url);
+			console.log('url:   ====> ', url);
+			// https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Y03P6xCTxsn5aoqmJZxT7BJcLMdWZXuA
             axios.get(url).then((response) => {
                 this.results = response.data.results; 
             }).catch( error => { console.log('Error: ',error); }); 

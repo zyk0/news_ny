@@ -21,11 +21,17 @@ body {
 	background-color: #F2DFCE;
 	padding: 10px 0px 20px 0px;
 	min-height: 3.125rem;
+	font-size: 1.5rem;
 }
 
 .card-title{
 	background-color: #F2DFCE;
 	font-family: Panton-BlackCaps, 'Panton-BlackCaps.otf', bold;
+	padding-top: 0.65rem;
+	padding-bottom: 0.65rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	font-size: 1.1rem;
 }
 
 .card {
@@ -33,27 +39,24 @@ body {
 	background-color: #FFF1E0;
 }
 .card-abstract{
-	padding: 0px 5px 0px 10px;
+	padding: 10px 5px 0px 10px;
 	font-family: Panton-LightCaps, 'Panton-LightCaps.otf';
 }
-
-
 
 .bold{
 	font-weight: bold;
 }
 
-.linkcolor{
-	color: #000000;
-}
-.linkcolor:hover {
-    color: #292929; /* ÷вет ссылки при наведении */ 
-   }
+.linkcolor{color: #000000;}
+.linkcolor:visited{color: #3b3b3b;} 
+.linkcolor:hover{color: #292929;}
+.linkcolor:active{color: #292929;}
    
    
 /* footer */
 
-.social-footer {
+.footer {
+  width: 100%;
   padding: 1rem;
   background: #F2DFCE;
   display: -webkit-flex;

@@ -49,13 +49,13 @@ Vue.component('news-list', {
     props: ['results'], 
     template: `
         <section>
-            <div class="row" v-for="posts in newsPosts">
+            <!-- <div class="row" v-for="posts in newsPosts"> упрощение -->
 			
-                <div class="columns large-3 medium-6" v-for="post in posts">
+                <div class="columns large-3 medium-6" v-for="post in results">
                     <div class="card">
 					
                         <div class="card-title">
-                            <span class="bold">post.title</span>: 
+						<!-- <span class="bold">post.title</span>: --> 
 								<a :href="post.url" target="_blank" class="linkcolor">
 									{{ post.title }}
 								</a>
@@ -70,26 +70,29 @@ Vue.component('news-list', {
 						</div>
 						
                         <div class="card-abstract">
-                            <span class="bold">post.abstract</span>: <p>{{ post.abstract }}</p>
+                            <!-- <span class="bold">post.abstract</span>: -->
+							<p>{{ post.abstract }}</p>
                         </div>
 
 						<div class="card-section">
-                            <span class="bold">post.section</span>: <p><small>рубрика: {{ post.section }}</small></p>
-							<span class="bold">post.published_date</span>:  <p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
+								<!-- <span class="bold">post.section</span>: -->
+							<p><small>рубрика: {{ post.section }}</small></p>
+								<!-- <span class="bold">post.published_date</span>: --> 
+							<p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
                         </div>
 						
                     </div>
                 </div>
 				
-            </div>
+            <!-- </div> -->
         </section>
     `,
-    computed: {
+    /*
+	computed: {
+		// количество карточек на экране
         newsPosts() {
             let posts = this.results;
 			console.log('posts ', posts);
-			
-			//картинка для поста
 
             let i;
 			let j;
@@ -100,11 +103,10 @@ Vue.component('news-list', {
             }
 			console.log('posts.length: ', posts.length);
 			console.log('fragmentArray ',  fragmentArray.length);
-            
 			return fragmentArray;
-
         }
     }
+	*/
 })
 
 const vm = new Vue({
@@ -120,10 +122,13 @@ const vm = new Vue({
         getPosts(section) {
             let url = buildUrl(section); 
 			console.log('url:   ====> ', url);
+			console.log('section:   ====> ', section);
+			
 			// https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Y03P6xCTxsn5aoqmJZxT7BJcLMdWZXuA
             axios.get(url).then((response) => {
                 this.results = response.data.results; 
             }).catch( error => { console.log('Error: ',error); }); 
+			
         }
     }, 
 }); 

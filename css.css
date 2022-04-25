@@ -51,7 +51,10 @@ body {
 .linkcolor:visited{color: #3b3b3b;} 
 .linkcolor:hover{color: #292929;}
 .linkcolor:active{color: #292929;}
-   
+
+.cursor{
+	cursor: ne-resize;
+}
    
 /* footer */
 

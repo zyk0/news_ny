@@ -3,48 +3,50 @@ const apiKey = api_key.KEY;
  
 //const nytSections  = 'travel'; 
 //nytSections массив
-/*
+
 const nytSections = [
-  "home",
-  "arts",
-  "automobiles",
+   "home",
+   "arts",
+   "automobiles",
   "books",
   "business",
-  "fashion",
+   "fashion",
   "food",
   "health",
   "insider",
   "magazine",
   "movies",
   "nyregion",
-  "obituaries",
   "opinion",
   "politics",
   "realestate",
   "science",
-  "sports",
+   "sports",
   "sundayreview",
-  "technology",
+   "technology",
   "theater",
   "magazine",
   "travel",
-  "upshot",
-  "us",
+   "upshot",
+   "us",
   "world",
 ]
-*/
+
+
+
 console.log('apiKey: ', apiKey ? "действующий apiKey" : "недействующий apiKey"); 
 
 function buildUrl (url) {
 	
 	console.log('NYTapiUrl: ' ,NYTapiUrl);
 	console.log('url: ', url);
-	console.log('apiKey: ', apiKey);
+	// console.log('apiKey: ', apiKey); 
+	// Y03P6xCTxsn5aoqmJZxT7BJcLMdWZXuA
 	
     return NYTapiUrl + url + ".json?api-key=" + apiKey;  
 }
 
-// Vue.component(tag, options)
+//Vue.component(tag, options)
 Vue.component('news-list', {
     props: ['results'], 
     template: `
@@ -61,12 +63,16 @@ Vue.component('news-list', {
 								</a>
                         </div>
 						
-						<div class="media-object-section">
+						<div v-if="post['multimedia'] != null" class="media-object-section">
+						<!-- картинка-заглушка, если post['multimedia'] - null -->
 							<!--
 							<span class="bold">post.url</span>: 
 							<a :href="post.url" target="_blank">{{post.url}}</a> 
 							-->
-							<img :src="post.multimedia[1].url" alt="post.multimedia[1].copyright">
+							<img :src="post.multimedia[1].url">
+						</div>
+						<div v-else>
+						  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9SnNUKamw7c_kGjvIQOTzcFji_-HL9f5sLQ&usqp=CAU">
 						</div>
 						
                         <div class="card-abstract">
@@ -76,7 +82,7 @@ Vue.component('news-list', {
 
 						<div class="card-section">
 								<!-- <span class="bold">post.section</span>: -->
-							<p><small>рубрика: {{ post.section }}</small></p>
+							<p class="cursor"><small>рубрика: {{ post.section }}</small></p>
 								<!-- <span class="bold">post.published_date</span>: --> 
 							<p><small>опубликовано: {{ post.published_date.slice(0,10) }}</small></p>
                         </div>
@@ -109,23 +115,34 @@ Vue.component('news-list', {
 	*/
 })
 
+console.log('nytSections.length: ', nytSections.length); //>>26
+let random = Math.floor(Math.random()  * nytSections.length) 
+console.log('random: ', random);
+const randomsection = nytSections[random];
+console.log('randomsection: ', randomsection);
+console.log('typeof randomsection: ', typeof randomsection);
+let section = randomsection; 
+
 const vm = new Vue({
     el: "#news", 
     data: {
         results: [],
-        section: 'arts' // section по дефолту , например, 'arts'
+	    section, 
+		//section ? section : "arts"
+        //section: 'arts' // section по дефолту
     }, 
      mounted() {
         this.getPosts(this.section);
+		console.log('this.section: ', this.section);
     }, 
     methods: {
         getPosts(section) {
-            let url = buildUrl(section); 
-			console.log('url:   ====> ', url);
+            let apirequest = buildUrl(section); 
+			console.log('api request:   ====> ', apirequest);
 			console.log('section:   ====> ', section);
 			
 			// https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Y03P6xCTxsn5aoqmJZxT7BJcLMdWZXuA
-            axios.get(url).then((response) => {
+            axios.get(apirequest).then((response) => {
                 this.results = response.data.results; 
             }).catch( error => { console.log('Error: ',error); }); 
 			

@@ -86,26 +86,7 @@ Vue.component('news-list', {
             </div>
         </section>
     `,
-    
-	computed: {
-		// количество карточек на экране
-        newsPosts() {
-            let posts = this.results;
-			console.log(' - - - posts ', posts);
-
-            let i;
-			let j;
-			let fragmentArray = []; 
-			let chunk = 4;
-            for (i=0, j=0; i < posts.length; i += chunk, j++) {
-                fragmentArray[j] = posts.slice(i,i+chunk);
-            }
-			console.log(' - - - posts.length: ', posts.length);
-			console.log(' - - - -  fragmentArray ',  fragmentArray.length);
-			return fragmentArray;
-        }
-    }
-	
+	computed: {}
 })
 
 console.log('nytSections.length: ', nytSections.length); //>>26
@@ -115,6 +96,8 @@ const randomsection = nytSections[random];
 console.log('randomsection: ', randomsection);
 console.log('typeof randomsection: ', typeof randomsection); //>>string
 let section = randomsection; 
+
+
 
 const vm = new Vue({
     el: "#news", 
@@ -126,7 +109,6 @@ const vm = new Vue({
      mounted() {
         this.getPosts(this.section);
 		console.log('this.section: ', this.section);
-		
     }, 
     methods: {
         getPosts(section) {
@@ -138,6 +120,6 @@ const vm = new Vue({
                 this.results = response.data.results; 
             }).catch( error => { console.log('Error: ',error); }); 
 			
-        }
+        }	
     }, 
 }); 
